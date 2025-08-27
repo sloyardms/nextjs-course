@@ -1,5 +1,8 @@
 "use server";
 
+import { redirect } from "next/navigation";
+import { saveMeal } from "./meals";
+
 export async function shareMeal(formData) {
     'use server';
 
@@ -12,5 +15,6 @@ export async function shareMeal(formData) {
         image: formData.get('image'),
     }
 
-    console.log(meal);
+    await saveMeal(meal);
+    redirect("/meals");
 }
