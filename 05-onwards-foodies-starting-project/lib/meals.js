@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 const db = sql("meals.db");
 
 export async function getMeals() {
-    //await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     //throw  new Error("Loading meals failed");
     const meals = db.prepare("SELECT * FROM meals").all();
