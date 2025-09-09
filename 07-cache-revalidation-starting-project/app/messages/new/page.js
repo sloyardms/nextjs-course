@@ -1,0 +1,37 @@
+import { redirect } from 'next/navigation';
+
+import { addMessage } from '@/lib/messages';
+import { revalidatePath, revalidateTag } from 'next/cache';
+
+export default function NewMessagePage() {
+  async function createMessage(formData) {
+    'use server';
+
+    const message = formData.get('message');
+    addMessage(message);
+    //revalidatePath('/messages');
+    revalidateTag("msg");
+    redirect('/messages');
+    //revalidatePath('/messages'); // This will revalidate the messages list page
+    //revalidatePath('/messages','layout'); // This will revalidate the messages list page but also the layouts
+    //revalidatePath('/'); // This will revalidate all pages and nested pages
+    //revalidatePath('/','layout'); // This will revalidate all pages and nested pages but also the layouts
+    //revalidateTag('msg'); // This will revalidate and throw away all cached data with the 'msg' tag, revalidating multiple pages that use 'msg' tagged data
+  }
+
+  return (
+    <>
+      <h2>New Message</h2>
+      <form action={createMessage}>
+        <p className="form-control">
+          <label htmlFor="message">Your Message</label>
+          <textarea id="message" name="message" required rows="5" />
+        </p>
+
+        <p className="form-actions">
+          <button type="submit">Send</button>
+        </p>
+      </form>
+    </>
+  );
+}
