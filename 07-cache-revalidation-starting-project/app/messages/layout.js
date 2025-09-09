@@ -6,6 +6,7 @@ export default async function MessagesLayout({ children }) {
     headers: {
       'X-ID': 'layout',
     },
+    //next: { tags: ['msg'] }, // Tag this fetch with 'msg' so we can revalidate it later
   });
   const messages = await response.json();
   const totalMessages = messages.length;
