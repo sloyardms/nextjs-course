@@ -21,4 +21,6 @@ export function addMessage(message) {
 export const getMessages = nextCache(cache(function getMessages() {
   console.log('Fetching messages from db');
   return db.prepare('SELECT * FROM messages').all();
-}), ["messages"]);
+}), ["messages"], {
+  tags: ["msg"]
+});
