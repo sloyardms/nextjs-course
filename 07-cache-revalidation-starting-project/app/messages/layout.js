@@ -10,7 +10,7 @@ export default async function MessagesLayout({ children }) {
     //next: { tags: ['msg'] }, // Tag this fetch with 'msg' so we can revalidate it later
   });
   const messages = await response.json(); */
-  const messages = getMessages();
+  const messages = await getMessages();
   const totalMessages = messages.length;
 
   return (
