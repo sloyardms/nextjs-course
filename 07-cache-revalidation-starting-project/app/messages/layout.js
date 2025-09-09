@@ -1,3 +1,6 @@
+
+export const revalidate = 5;
+
 export default async function MessagesLayout({ children }) {
   const response = await fetch('http://localhost:8080/messages', {
     headers: {
