@@ -10,9 +10,9 @@ import Image from 'next/image';
 function imageLoader(config) {
   const urlStart = config.src.split('upload/')[0];
   const urlEnd = config.src.split('upload/')[1];
-  const transformations = `w_500,q_${config.quality || 75}`;
+  const transformations = `w_${config.width},q_${config.quality || 75}`;
   const finalUrl = `${urlStart}upload/${transformations}/${urlEnd}`;
-
+  console.log(finalUrl);
   return finalUrl;
 }
 
