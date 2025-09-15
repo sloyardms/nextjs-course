@@ -1,5 +1,7 @@
 "use server"
 
+import { createUser } from "@/lib/user";
+
 export async function signup(prevState, formData){
     const email = formData.get("email");
     const password = formData.get("password");
@@ -19,6 +21,7 @@ export async function signup(prevState, formData){
             errors,
         }
     }
-    //store it in the database (create new user)
 
+    //store it in the database (create new user)
+    createUser(email, password);
 }
