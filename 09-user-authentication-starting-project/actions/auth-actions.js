@@ -48,7 +48,6 @@ export async function login(prevState, formData) {
     const password = formData.get("password");
 
     const existingUser = getUserByEmail(email);
-
     if (!existingUser) {
         return {
             errors: {
@@ -58,17 +57,22 @@ export async function login(prevState, formData) {
     }
 
     const isValidPassword = verifyPassword(existingUser.password, password);
-
     if (!isValidPassword) {
-        if (!existingUser) {
-            return {
-                errors: {
-                    password: "Could not authenticate user, please check your credentials."
-                }
+        return {
+            errors: {
+                password: "Could not authenticate user, please check your credentials."
             }
         }
     }
 
     await createAuthSession(existingUser.id)
     redirect("/training");
+}
+
+export async function auth(mode, prevState, formData) {
+    if (mode === "login") {
+        return login(prevState, formData);
+    } else {
+        return signup(prevState, formData);
+    }
 }

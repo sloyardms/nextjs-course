@@ -1,11 +1,11 @@
 "use client"
 
-import { signup } from '@/actions/auth-actions';
+import { auth } from '@/actions/auth-actions';
 import Link from 'next/link';
 import { useActionState } from 'react';
 
 export default function AuthForm({ mode }) {
-  const [formState, formAction] = useActionState(signup, {});
+  const [formState, formAction] = useActionState(auth.bind(null, mode), {});
 
   return (
     <form id="auth-form" action={formAction}>
@@ -20,7 +20,7 @@ export default function AuthForm({ mode }) {
         <label htmlFor="password">Password</label>
         <input type="password" name="password" id="password" />
       </p>
-      {formState.errors && (
+      {formState?.errors && (
         <ul id="form-errors">
           {Object.keys(formState.errors).map((error) =>
             <li key={error}>{formState.errors[error]}</li>)}
